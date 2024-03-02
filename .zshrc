@@ -1,5 +1,6 @@
-source zsh/rc.prompt
-source zsh/rc.misc
+CONFIGS_DIR=$(dirname $(readlink -f ~/.zshrc))
+source "$CONFIGS_DIR/zsh/rc.prompt"
+source "$CONFIGS_DIR/zsh/rc.misc"
 
 # Homebrew
 export HOMEBREW_NO_ENV_HINTS=0
