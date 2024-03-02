@@ -1,0 +1,27 @@
+# Files & directories
+export ZENV=~/.zshenv
+export ZRC=~/.zshrc
+export DEV=~/dev
+
+# Aliases
+alias ll="ls -lAh -D '%d-%b-%Y %T' --color=always"
+alias tldr='tldr -L en'
+alias gh="history 0 | grep"
+
+# ls command colors
+export CLICOLOR=1
+export LSCOLORS=ExGxBxdxCxEgEdxbxgacec
+
+# Use Option + Left/Right to move one word
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+
+# Quickly get JDK's location
+wherejdk() {
+    if [ -n "$1" ]; then
+        echo $(/usr/libexec/java_home -v $1)
+    else
+        echo "The \$JAVA_HOME variable is currently set to JDK $PREFERRED_JDK_VERSION:"
+        echo $JAVA_HOME
+    fi
+}

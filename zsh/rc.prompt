@@ -1,0 +1,27 @@
+setopt PROMPT_SUBST
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "(%b)"
+
+precmd() {
+  vcs_info
+  if [ $(git branch > /dev/null 2>&1; echo $?) -eq 0 ]; then
+    # inside a git repository
+    P_BRANCH=" %F{$P_GIT_COLOR}${vcs_info_msg_0_}%f"
+  else
+    P_BRANCH=""
+  fi
+}
+
+P_USER_COLOR="green"
+P_HOSTNAME_COLOR="green"
+P_DIR_COLOR="cyan"
+P_GIT_COLOR="red"
+
+P_USER="%F{$P_USER_COLOR}%n%f"
+P_HOSTNAME="%F{$P_HOSTNAME_COLOR}%m%f"
+P_DIRECTORY="%B%F{$P_DIR_COLOR}%~%f%b" # %~ is full directory, %c is basename
+P_SIGN="%B>%b"
+P_LINEBREAK=$'\n'
+
+export PROMPT='$P_USER@$P_HOSTNAME:$P_DIRECTORY$P_BRANCH$P_LINEBREAK$P_SIGN '
