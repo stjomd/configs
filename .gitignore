@@ -1,0 +1,6 @@
+.config/*
+
+# zed
+!.config/zed/
+.config/zed/*
+!.config/zed/settings.json
