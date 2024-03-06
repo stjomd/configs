@@ -4,13 +4,18 @@ export ZRC=~/.zshrc
 export DEV=~/dev
 
 # Aliases
-alias ll="ls -lAh -D '%d-%b-%Y %T' --color=always"
+alias ls="ls --color=auto"
+alias ll="ls -lh -D '%d-%b-%Y %T'"
 alias tldr='tldr -L en'
 alias gh="history 0 | grep"
+alias cgrep="grep --color=always"
 
 # ls command colors
 export CLICOLOR=1
 export LSCOLORS=ExGxBxdxCxEgEdxbxgacec
+
+# grep
+export GREP_OPTIONS="--color=auto"
 
 # Use Option + Left/Right to move one word
 bindkey "[D" backward-word

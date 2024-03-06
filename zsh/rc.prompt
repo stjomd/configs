@@ -15,11 +15,11 @@ precmd() {
 
 P_USER_COLOR="green"
 P_HOSTNAME_COLOR="green"
-P_DIR_COLOR="cyan"
+P_DIR_COLOR="blue"
 P_GIT_COLOR="red"
 
-P_USER="%F{$P_USER_COLOR}%n%f"
-P_HOSTNAME="%F{$P_HOSTNAME_COLOR}%m%f"
+P_USER="%B%F{$P_USER_COLOR}%n%f%b"
+P_HOSTNAME="%B%F{$P_HOSTNAME_COLOR}%m%f%b"
 P_DIRECTORY="%B%F{$P_DIR_COLOR}%~%f%b" # %~ is full directory, %c is basename
 P_SIGN="%B>%b"
 P_LINEBREAK=$'\n'
