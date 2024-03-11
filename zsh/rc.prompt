@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
@@ -25,3 +27,4 @@ P_SIGN="%B>%b"
 P_LINEBREAK=$'\n'
 
 export PROMPT='$P_USER@$P_HOSTNAME:$P_DIRECTORY$P_BRANCH$P_LINEBREAK$P_SIGN '
+export RPROMPT='<'
