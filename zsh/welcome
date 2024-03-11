@@ -1,0 +1,64 @@
+#!/bin/sh
+
+bars() {
+    SEGMENTS=15
+    COLUMNS_PER_SEGMENT=10
+    TOTAL=$(($SEGMENTS * $COLUMNS_PER_SEGMENT))
+    MAX_HEIGHT=0
+
+    TERM_COLS=$(stty size | cut -w -f2)
+
+    for i in $(seq $TOTAL); do
+        # $i = column
+        if [ $(($i % $COLUMNS_PER_SEGMENT)) == 0 ]; then
+            HEIGHTS+=(0)
+            continue
+        fi
+        NEW_HEIGHT=$(($RANDOM % 7 + 1))
+        if [ $NEW_HEIGHT -gt $MAX_HEIGHT ]; then
+            MAX_HEIGHT=$NEW_HEIGHT
+        fi
+        HEIGHTS+=($NEW_HEIGHT)
+    done
+
+    echo ""
+
+    for j in $(seq $MAX_HEIGHT); do
+        printf " "
+        for i in $(seq $TOTAL); do
+            # $i = column, $j = row
+            if [ $((2 * $i)) -ge $TERM_COLS ]; then
+                break
+            fi
+            INVERTED_HEIGHT=$(($MAX_HEIGHT - $j + 1))
+            if [ $INVERTED_HEIGHT -le ${HEIGHTS[$i - 1]} ]; then
+                printf "██"
+            else
+                printf "  "
+            fi
+        done
+        printf "\n"
+    done
+
+    echo ""
+}
+
+welcome_date() {
+    date +'%A, %d %B %Y %X %Z'
+}
+
+welcome_jdk() {
+    cd "$JAVA_HOME/../.."
+    basename "$PWD"
+}
+
+welcome_node() {
+    source ~/.nvm/nvm.sh
+    nvm current
+}
+
+bars | lolcat
+
+echo " \033[1m$(welcome_date)\033[0m"
+echo " JDK: $(welcome_jdk) | Node: $(welcome_node)"
+echo ""
